@@ -7,33 +7,49 @@ class App extends Component {
     super();
 
     this.state = {
-      name: {firstname: "Luke", lastname:"skywalker" },
-      company: "Freelance",
-      role: "Developer"
+      monsters: [],
     }
+  }
+
+  // mounting is the first time a component gets loaded to the dom
+  // https://swapi.dev/api/people/
+  // https://jsonplaceholder.typicode.com/users
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then((users) => this.setState(()=>{
+        return {monsters:users}
+      },
+      () =>{ console.log(this.state);
+      })
+      )
   }
   
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>Hi {this.state.name.firstname} {this.state.name.lastname}, I work as a {this.state.role} at {this.state.company}</p>
-          <button onClick={() => {
-            this.setState( 
-              () =>{
-                return {
-              name: {firstname: 'Andrei', lastname:"the Giant"},
-            };
-          },
-          // this will run after the code above will run
-          () => {
-            console.log(this.state)
-          }
-          );
-          }}
-          >Change Name</button>
-        </header>
+        {
+          this.state.monsters.map((monster) => {
+            return (
+            <div key={monster.id}>
+              <h1>I am a monster called {monster.name}</h1>
+              <ul>
+                <li>
+                  {monster.address.street}
+                </li>
+                <li>
+                  {monster.website}
+                </li>
+                <li>
+                  {monster.email}
+                </li>
+              </ul>
+
+
+             </div>
+            )
+          })
+        }
       </div>
     );
 }
