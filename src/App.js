@@ -6,7 +6,6 @@ import './App.css';
 
 
 const App = () =>{
-  console.log('render');
   // setting a new state so that if it changes the state will change
   const [searchField, setSearchField] = useState('');
   const [monsters, setMonsters]= useState([]);
@@ -32,9 +31,6 @@ const App = () =>{
         .then((users) => setMonsters(users))
   },[]);
 
-  console.log('render')
-
-  
   const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLowerCase();
     setSearchField(searchFieldString);
