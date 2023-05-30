@@ -10,3 +10,9 @@ body {
   );
   text-align: center;
 }
+
+.app-title {
+  color:rgb(14, 220, 220);
+  font-size: 4rem;
+  text-align: center;
+}
